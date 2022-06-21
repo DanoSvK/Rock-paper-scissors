@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const userInput = () => {
+            let user = prompt('Choose rock, paper or scissors').toLowerCase()
+            if(user === 'rock' || user === 'paper' || user === 'scissors') {
+                return user
+
+            }
+            else {
+                alert('Error, write rock, paper or scissors')
+                return userInput()
+            }
+        }
+        
+        const pcInput = () => {
+            return Math.floor(Math.random() * 3)
+        }
+        
+        const pcChoice = () => {
+            if(pcInput() == 0) {
+                return 'rock'
+            }
+            else if(pcInput() == 1) {
+                return 'paper'
+            }
+            else {
+                return 'scissors'
+            }
+        }
+        
+        const determineWinner = (user, pc) => {
+            if(user === pc) {
+                return 'tie'
+            }
+            if(user === 'rock') {
+                if(pc === 'scissors') {
+                    return 'user wins'
+                }
+                    else {
+                        return 'pc wins'
+                    }
+            }
+            if(user === 'paper' ) {
+                if(pc === 'rock') {
+                    return 'user wins'
+                }    
+                    else {
+                        return 'pc wins'
+                    }
+            }
+            if(user === 'scissors') {
+                if(pc === 'paper') {
+                    return 'user wins'
+                }
+                    else {
+                        return 'pc wins'
+                    }
+            }
+        }
+
+        let userScore = 1
+        let pcScore = 1
+        const game = (user, pc) => {
+            console.log(`You chosed ${user} and PC chosed ${pc}.`)
+            if(determineWinner(user, pc) === 'user wins') {
+                console.log(`You win! Your score is ${userScore++}`)
+            }
+            else if(determineWinner(user, pc) === 'pc wins') {
+                console.log(`PC wins. PC's score is ${pcScore++}`)
+            }
+            else {
+                console.log(`It's a tie. No points.`)
+            }
+        }
+        for(i = 1; i <= 5; i++) {
+            console.log(game(userInput(), pcChoice()))
+            if(i == 5) {
+                if(userScore > pcScore) {
+                    console.log(`Your score is ${userScore - 1} and PC's score is ${pcScore - 1}. You win! Congratulations!`)
+                }
+                else if(pcScore > userScore) {
+                    console.log(`Your score is ${userScore - 1} and PC's score is ${pcScore - 1}. PC wins. Better luck next time.`)
+                }
+                else {
+                    console.log(`Your score is ${userScore - 1} and PC's score is ${pcScore - 1}. It's a tie.`)
+                }
+            }
+        }
+    </script>
+</body>
+</html>
